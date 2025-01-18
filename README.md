@@ -59,25 +59,25 @@ Ensure you have the following installed:
    git clone git@github.com:devmt10/Stellarsight.git
 Navigate into the project directory:
 
-cd stellarsight
+**cd stellarsight**
 
 Install the dependencies:
 
 
-npm install
+**npm install**
 
 Start the development server:
 
-npm start
+**npm start**
 
 Open your browser and navigate to:
 
-http://localhost:3000
+**http://localhost:3000**
 
-License 📜
+## **Licenses 📜** 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-Acknowledgements 🌌
+## **Licenses 🌌** 
 NASA's public APIs for space data and images.
 Spotify API for embedding music to enhance the app's user experience.
 YouTube API for embedding video content to explore space-themed videos.
