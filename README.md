@@ -56,28 +56,24 @@ Ensure you have the following installed:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/yourusername/stellarsight.git
+   git clone git@github.com:devmt10/Stellarsight.git
 Navigate into the project directory:
 
-bash
-
 cd stellarsight
+
 Install the dependencies:
 
-bash
 
 npm install
+
 Start the development server:
 
-bash
-Copier
-Modifier
 npm start
+
 Open your browser and navigate to:
 
-bash
-
 http://localhost:3000
+
 License 📜
 This project is licensed under the MIT License - see the LICENSE file for details.
 
