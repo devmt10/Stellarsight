@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SpotifyEmbed = ({ src }) => {
-    const theme = "0";
+    const theme = "0"; //spotity only allows 0 and 1
 
     const updatedSrc = `${src}?utm_source=generator&theme=${theme}`;
 

@@ -35,11 +35,12 @@ const Mars = () => {
 
     return (
         <div className="text-center text-white">
+
             {/* Spotify Embed */}
             <SpotifyEmbed src="https://open.spotify.com/embed/track/3ZE3wv8V3w2T2f7nOCjV0N?utm_source=generator&theme=0" />
 
             {/* Page Title */}
-            <h1 className="text-3xl font-bold mb-6">Mars Rover Photos</h1>
+            <h1 className="text-3xl font-bold mb-6">Mars rover photos</h1>
 
             {/* Filters */}
             <div className="mb-6">
