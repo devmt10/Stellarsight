@@ -27,16 +27,21 @@
   
 - **NASA's EPIC (Earth Polychromatic Imaging Camera) API**:  
   Displays Earth images taken from space.
+
+- **Mars Rover Photos API**:
+- Provides images and data from NASA's Mars Rover missions (Curiosity, Perseverance, etc.).
   
 - **Spotify Embed API**:  
   Embeds music from Spotify to enrich the user experience.
 
 ## **Technologies Used** 🛠️
 
+- **JavaScript**  
 - **React.js**  
 - **Tailwind CSS**  
 - **NASA APIs**  
 - **Spotify API**
+- **YouTube API**
 
 ## **Getting Started** 🚀
 
@@ -74,10 +79,9 @@ License 📜
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 Acknowledgements 🌌
-NASA's public APIs for space data and images.
-Spotify API for embedding music to enhance the app's user experience.
+**NASA's public APIs** for space data and images.
+**Spotify API** for embedding music to enhance the app's user experience.
+**YouTube API** for embedding video content to explore space-themed videos.
 
-Copier
-Modifier
 
 
