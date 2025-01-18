@@ -77,7 +77,7 @@ Open your browser and navigate to:
 ## **Licenses 📜** 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## **Licenses 🌌** 
+## **Acknowledgements 🌌** 
 NASA's public APIs for space data and images.
 Spotify API for embedding music to enhance the app's user experience.
 YouTube API for embedding video content to explore space-themed videos.
