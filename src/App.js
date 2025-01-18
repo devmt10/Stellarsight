@@ -12,26 +12,33 @@ import Mars from './pages/Mars';
 const App = () => {
     return (
         <Router>
-            <div
-                className="font-sans min-h-screen bg-cover bg-center bg-no-repeat"
-                style={{
-                    backgroundImage: "url('images/virtualbackground-02.webp')",
-                    backgroundAttachment: 'fixed',
-                    backgroundPosition: 'center center',
-                    backgroundSize: 'cover',
-                }}
-            >
-                <Header />
-                <main className="px-6 py-8 relative z-10">
-                    <Routes>
-                        <Route path="/" element={<MainContent />} />
-                        <Route path="/pictureoftheday" element={<PictureOfTheDay />} />
-                        <Route path="/earthpictures" element={<EarthPicturesPage />} />
-                        <Route path="/asteroids" element={<Asteroids />} />
-                        <Route path="/mars" element={<Mars />} />
-                    </Routes>
-                </main>
-                <Footer />
+            <div className="font-sans min-h-screen relative">
+                {/* Background Image with Overlay */}
+                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                     style={{
+                         backgroundImage: "url('images/virtualbackground-02.webp')",
+                         backgroundAttachment: 'fixed',
+                         backgroundPosition: 'center center',
+                         backgroundSize: 'cover',
+                     }}>
+                    {/* Semi-transparent overlay for the background */}
+                    <div className="absolute inset-0 bg-black opacity-50"></div>
+                </div>
+
+                {/* Content Section */}
+                <div className="relative z-10">
+                    <Header />
+                    <main className="px-6 py-8 relative z-10">
+                        <Routes>
+                            <Route path="/" element={<MainContent />} />
+                            <Route path="/pictureoftheday" element={<PictureOfTheDay />} />
+                            <Route path="/earthpictures" element={<EarthPicturesPage />} />
+                            <Route path="/asteroids" element={<Asteroids />} />
+                            <Route path="/mars" element={<Mars />} />
+                        </Routes>
+                    </main>
+                    <Footer />
+                </div>
             </div>
         </Router>
     );

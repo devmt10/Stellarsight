@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
 
 const HomePageCard = ({ image, title, description, link }) => {
     return (
-        <article className="flex flex-col justify-between bg-[#061f4a] p-6 rounded-lg shadow-lg w-80 min-h-[380px] text-center transition-transform duration-300 hover:shadow-2xl">
+        <article className="flex flex-col justify-between bg-[#061f4a] p-6 rounded-lg shadow-lg w-80 min-h-[380px] text-center transition-transform duration-300 hover:shadow-2xl hover:scale-105">
             <img
                 src={image}
                 alt={title}
