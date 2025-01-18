@@ -56,44 +56,28 @@ git clone https://github.com/yourusername/stellarsight.git
 Navigate into the project directory:
 
 bash
-Copier
-Modifier
+
 cd space-explorer
 Install the dependencies:
 
 bash
-Copier
-Modifier
+
 npm install
 Start the development server:
 
 bash
-Copier
-Modifier
-npm start
-Open your browser and navigate to:
 
-arduino
-Copier
-Modifier
-http://localhost:3000
+npm start
+Open your browser and navigate to your localhost.
+
 License 📜
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 Acknowledgements 🌌
 NASA's public APIs for space data and images.
 Spotify API for embedding music to enhance the app's user experience.
-markdown
+
 Copier
 Modifier
 
-### How This Will Render:
 
-- **Bold text**: Text inside `**` will be bold (e.g., `**Bold Text**`).
-- **Headings**: Text following `#` will be a heading. The more `#` symbols, the smaller the header (e.g., `# Main Header`, `## Sub Header`).
-- **Lists**: Items starting with `-` will render as bullet points.
-- **Code blocks**: Code will be formatted inside backticks or fenced with triple backticks (```` ``` ````).
-
-You can now copy and paste this into your `README.md` file, and it should render beautifully with proper Markdown formatting on GitHub.
-
-Let me know if you need further help with this!
