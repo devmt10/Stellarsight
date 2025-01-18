@@ -1,5 +1,5 @@
 
-# **StellarSight** 🚀✨
+# **Stellarsight** 🚀✨
 
 **StellarSight** is an interactive web app that allows users to explore the cosmos through NASA's APIs. Featuring daily images, asteroid data, Earth and Mars exploration, and Spotify music embeds, it's designed to provide an engaging and visually rich space experience.
 
