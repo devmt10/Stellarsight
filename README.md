@@ -22,6 +22,8 @@
 
 ## **APIs Integrated** 
 
+NASA API website URL : https://api.nasa.gov/
+
 - **NASA Astronomy Picture of the Day (APOD) API**:  
   Fetches the featured image or video for the day, along with detailed descriptions, to inspire and educate users about space.
 
@@ -59,23 +61,17 @@ Before getting started, ensure you have the following installed on your system:
 
 git clone https://github.com/yourusername/stellarsight.git
 
-Navigate into the project directory:
+Navigate into the project directory: **cd stellarsight**
 
-**cd stellarsight**
+Install the dependencies: **npm install**
 
-Install the dependencies:
-
-**npm install**
-
-Start the development server:
-
-**npm start**
+Start the development server: **npm start**
 
 Open your browser and navigate to:
 
 http://localhost:3000
 
-### **License **
+### **License**
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ### **Acknowledgements**
