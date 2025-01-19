@@ -14,21 +14,22 @@ const App = () => {
         <Router>
             <div className="font-sans min-h-screen relative">
                 {/* Background Image with Overlay */}
-                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                     style={{
-                         backgroundImage: "url('images/virtualbackground-02.webp')",
-                         backgroundAttachment: 'fixed',
-                         backgroundPosition: 'center center',
-                         backgroundSize: 'cover',
-                     }}>
-                    {/* Semi-transparent overlay for the background */}
-                    <div className="absolute inset-0 bg-black opacity-50"></div>
+                <div
+                    className="absolute inset-0 bg-cover"
+                    style={{
+                        backgroundImage: "url('/images/virtualbackground-02.webp')",
+                        backgroundAttachment: 'fixed',
+                        backgroundPosition: 'center center',
+                        backgroundSize: 'cover',
+                    }}
+                >
+                    <div className="absolute inset-0 bg-black opacity-80"></div>
                 </div>
 
                 {/* Content Section */}
                 <div className="relative z-10">
                     <Header />
-                    <main className="px-6 py-8 relative z-10">
+                    <main className="px-4 sm:px-6 py-8 relative z-1">
                         <Routes>
                             <Route path="/" element={<MainContent />} />
                             <Route path="/pictureoftheday" element={<PictureOfTheDay />} />

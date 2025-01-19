@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ApiKey from "../api/ApiKey";
+import Banner from '../components/Banner';
+import Background from '../components/Background';
+import MarsCard from '../components/MarsCard';
+import ShowMoreButton from '../components/ShowMoreButton';
+
+const baseUrl = "https://api.nasa.gov/mars-photos/api/v1/rovers/";
 
 const Mars = () => {
     const [photos, setPhotos] = useState([]);
@@ -8,17 +14,13 @@ const Mars = () => {
     const [camera, setCamera] = useState("all");
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
+    const [visibleCount, setVisibleCount] = useState(5);
 
-    const photosPerPage = 12;
-    const baseUrl = "https://api.nasa.gov/mars-photos/api/v1/rovers/";
-
-    const fetchMarsPhotos = async (pageNumber) => {
+    const fetchMarsPhotos = async () => {
         setLoading(true);
         setError(null);
         try {
-            let url = `${baseUrl}${rover}/photos?sol=${sol}&api_key=${ApiKey}&page=${pageNumber}`;
+            let url = `${baseUrl}${rover}/photos?sol=${sol}&api_key=${ApiKey}`;
             if (camera !== "all") {
                 url += `&camera=${camera}`;
             }
@@ -30,9 +32,7 @@ const Mars = () => {
             }
 
             const data = await response.json();
-            const totalPhotos = data.photos.length;
             setPhotos(data.photos);
-            setTotalPages(Math.ceil(totalPhotos / photosPerPage));
         } catch (err) {
             setError(err.message);
         } finally {
@@ -40,30 +40,25 @@ const Mars = () => {
         }
     };
 
+    // Fetch photos whenever rover, sol, or camera changes
     useEffect(() => {
-        fetchMarsPhotos(currentPage);
-    }, [currentPage, rover, sol, camera]);
+        fetchMarsPhotos();
+    }, [rover, sol, camera]);
 
-    const changePage = (pageNumber) => {
-        if (pageNumber >= 1 && pageNumber <= totalPages) {
-            setCurrentPage(pageNumber);
-        }
+    const handleShowMore = () => {
+        setVisibleCount(prevCount => prevCount + 5);
     };
-
+//Error with the Nasa API (not showing all images, informing user via banner)
+// API currently showing pictures for 1000 and 3000 (sol), curiosity rover and all cameras
     return (
-        <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-6">
-
+        <Background>
             {/* Banner Section */}
-            <div className="bg-blue-500 text-white py-4 px-6 rounded-md shadow-lg mb-8">
-                <p className="text-sm md:text-base text-center">
-                    <strong>Notice:</strong> Technical issues with the NASA Mars Rover Photos API may affect image display.
-                    Thank you for your patience while we resolve this.
-                </p>
-            </div>
+            <Banner message="Technical issues with the NASA Mars Rover Photos API may affect image display. Thank you for your patience while we resolve this." />
 
             {/* Title */}
-            <h1 className="text-4xl font-extrabold text-center mb-6 tracking-wide">
-                Explore Mars Rover Photos
+            <h1 className="text-4xl font-extrabold text-center mb-6 tracking-wide text-white"
+                aria-label="Explore Mars rover photos">
+                Explore Mars rover photos
             </h1>
 
             {/* Filters Section */}
@@ -71,11 +66,13 @@ const Mars = () => {
 
                 {/* Rover Filter */}
                 <div className="flex flex-col w-full sm:w-1/4">
-                    <label className="mb-2 text-sm font-medium text-gray-200">Rover</label>
+                    <label className="mb-2 text-sm font-medium text-gray-200" htmlFor="rover-select">Rover</label>
                     <select
+                        id="rover-select"
                         value={rover}
                         onChange={(e) => setRover(e.target.value)}
                         className="p-3 rounded-md bg-gray-700 text-white focus:ring-2 focus:ring-blue-500"
+                        aria-label="Select Rover"
                     >
                         <option value="curiosity">Curiosity</option>
                         <option value="opportunity">Opportunity</option>
@@ -85,23 +82,27 @@ const Mars = () => {
 
                 {/* Sol Filter */}
                 <div className="flex flex-col w-full sm:w-1/4">
-                    <label className="mb-2 text-sm font-medium text-gray-200">Martian Day (Sol)</label>
+                    <label className="mb-2 text-sm font-medium text-gray-200" htmlFor="sol-input">Martian Day (Sol)</label>
                     <input
+                        id="sol-input"
                         type="number"
                         value={sol}
                         onChange={(e) => setSol(e.target.value)}
                         min="0"
                         className="p-3 rounded-md bg-gray-700 text-white focus:ring-2 focus:ring-blue-500"
+                        aria-label="Enter Martian Day (Sol)"
                     />
                 </div>
 
                 {/* Camera Filter */}
                 <div className="flex flex-col w-full sm:w-1/4">
-                    <label className="mb-2 text-sm font-medium text-gray-200">Camera</label>
+                    <label className="mb-2 text-sm font-medium text-gray-200" htmlFor="camera-select">Camera</label>
                     <select
+                        id="camera-select"
                         value={camera}
                         onChange={(e) => setCamera(e.target.value)}
                         className="p-3 rounded-md bg-gray-700 text-white focus:ring-2 focus:ring-blue-500"
+                        aria-label="Select Camera"
                     >
                         <option value="all">All Cameras</option>
                         <option value="FHAZ">FHAZ (Front Hazard)</option>
@@ -112,26 +113,16 @@ const Mars = () => {
                 </div>
             </div>
 
-            {/* Search Button */}
-            <div className="flex justify-center mb-8">
-                <button
-                    onClick={() => fetchMarsPhotos(currentPage)}
-                    className="bg-blue-600 text-white w-full sm:w-auto h-12 px-6 rounded-md shadow-md font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
-                >
-                    Search
-                </button>
-            </div>
-
             {/* Loading Indicator */}
             {loading && (
-                <div className="text-yellow-400 text-center text-lg font-semibold mb-6">
+                <div className="text-yellow-400 text-center text-lg font-semibold mb-6" aria-live="polite">
                     Loading photos...
                 </div>
             )}
 
             {/* Error Message */}
             {error && (
-                <div className="bg-red-500 text-white py-3 px-5 rounded-md mb-6 text-center">
+                <div className="bg-red-500 text-white py-3 px-5 rounded-md mb-6 text-center" role="alert">
                     {error}
                 </div>
             )}
@@ -139,69 +130,31 @@ const Mars = () => {
             {/* No Data Message */}
             {!error && photos.length === 0 && !loading && (
                 <div className="text-center text-gray-400">
-                    No photos found for the selected filters. Try adjusting your search!
+                    No photos found for the selected filters. Please try adjusting your search.
                 </div>
             )}
 
             {/* Photo Information */}
             {photos.length > 0 && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {photos.slice(0, photosPerPage).map((photo) => (
-                        <div
+                    {photos.slice(0, visibleCount).map((photo) => (
+                        <MarsCard
                             key={photo.id}
-                            className="bg-gray-800 p-6 rounded-md shadow-lg hover:shadow-2xl transition-shadow duration-300"
-                        >
-                            <img
-                                src={photo.img_src}
-                                alt={`Mars - ${photo.camera.full_name}`}
-                                className="w-full h-64 object-cover rounded-md mb-4"
-                            />
-                            <p className="text-sm text-gray-400 mb-1">
-                                <strong>Rover:</strong> {photo.rover.name}
-                            </p>
-                            <p className="text-sm text-gray-400 mb-1">
-                                <strong>Camera:</strong> {photo.camera.full_name}
-                            </p>
-                            <p className="text-sm text-gray-400 mb-1">
-                                <strong>Sol:</strong> {photo.sol}
-                            </p>
-                        </div>
+                            imageUrl={photo.img_src}
+                            title={`Mars - ${photo.camera.full_name}`}
+                            rover={photo.rover.name}
+                            camera={photo.camera.full_name}
+                            sol={photo.sol}
+                        />
                     ))}
                 </div>
             )}
 
-            {/* Pagination Controls */}
-            <div className="flex justify-center mt-8">
-                <div className="flex items-center gap-4">
-                    <button
-                        onClick={() => changePage(currentPage - 1)}
-                        disabled={currentPage === 1}
-                        className="bg-blue-600 text-white h-12 px-6 rounded-md font-semibold shadow-lg hover:bg-blue-700 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
-                    >
-                        Previous
-                    </button>
-
-                    {/* Page Number Buttons */}
-                    {Array.from({ length: totalPages }, (_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => changePage(index + 1)}
-                            className={`bg-blue-600 text-white h-12 w-12 rounded-md font-semibold shadow-lg hover:bg-blue-700 ${currentPage === index + 1 ? 'bg-blue-800' : ''} focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300`}
-                        >
-                            {index + 1}
-                        </button>
-                    ))}
-
-                    <button
-                        onClick={() => changePage(currentPage + 1)}
-                        disabled={currentPage === totalPages}
-                        className="bg-blue-600 text-white h-12 px-6 rounded-md font-semibold shadow-lg hover:bg-blue-700 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
-                    >
-                        Next
-                    </button>
-                </div>
-            </div>
-        </div>
+            {/* Show More Button */}
+            {visibleCount < photos.length && (
+                <ShowMoreButton onClick={handleShowMore} isVisible={visibleCount < photos.length} />
+            )}
+        </Background>
     );
 };
 
